@@ -11,9 +11,10 @@
   <meta property="og:title" data-i18n-meta="og_title" content="Dimensions Communication | أبعاد التواصل"/>
   <meta property="og:description" data-i18n-meta="og_desc" content="نبني حضورك الرقمي من الهوية وحتى التحويل."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:image" content="dc_logo.png"/>
+  <!-- ✅ الشعار الجديد -->
+  <meta property="og:image" content="dc_logo.png.1"/>
   <meta name="theme-color" content="#0ea5a3"/>
-  <link rel="icon" href="dc_logo.png"/>
+  <link rel="icon" href="dc_logo.png.1"/>
 
   <style>
     html{scroll-behavior:smooth}
@@ -47,20 +48,31 @@
       border-bottom:1px solid var(--stroke)
     }
     .bar{
-      display:grid;grid-template-columns:1fr auto 1fr;
-      align-items:center;gap:10px;padding:10px 0
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:10px 0
     }
-    .controls{display:flex;gap:12px;align-items:center;justify-self:start}
+
+    /* ✅ الشعار فقط (بدون نص بجانبه) */
+    .brand{
+      display:flex;align-items:center;gap:0;
+      padding:8px 10px;border-radius:14px;
+      background:color-mix(in oklab,var(--card) 85%,transparent);
+      border:1px solid var(--stroke);
+      box-shadow:var(--shadow)
+    }
+    .brand img{height:54px;width:auto;object-fit:contain}
+
+    .bar-actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+
+    .controls{display:flex;gap:10px;align-items:center}
     .control{
       border:1px solid var(--stroke);background:var(--card);color:var(--ink);
-      padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:700;
+      padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:800;
       box-shadow:var(--shadow)
     }
     .control:focus-visible{outline:none;box-shadow:var(--focus)}
-    .center-logo{justify-self:center;display:flex;align-items:center;gap:10px}
-    .center-logo img{height:116px;width:auto;object-fit:contain;display:none}
 
-    .social{justify-self:end;display:flex;gap:8px;align-items:center}
+    .social{display:flex;gap:8px;align-items:center}
     .social a{
       width:42px;height:42px;display:grid;place-items:center;
       border:1px solid var(--stroke);background:var(--card);
@@ -111,7 +123,15 @@
       position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
       text-align:center;z-index:2;width:100%;max-width:900px
     }
-    h1{margin:10px 0 8px;font-size:clamp(2rem,5vw,4rem);font-weight:900}
+    h1{
+      margin:10px 0 8px;
+      font-size:clamp(2rem,5vw,4rem);
+      font-weight:900;
+      white-space:pre-line; /* ✅ يسمح بسطرين */
+    }
+    /* ✅ دعم أسطر متعددة للنص الإنجليزي */
+    #heroDesc{white-space:pre-line}
+
     .btn{
       display:inline-block;background:linear-gradient(135deg,var(--brand),#22d3ee);
       color:#081418;padding:12px 16px;border-radius:12px;font-weight:800
@@ -173,7 +193,7 @@
     .portfolio-strip .head [data-i18n="portfolio_hint"],
     #portfolio [data-i18n="portfolio_note"]{display:none}
 
-    /* قسم خدماتنــــــــا: شريط صور التقييمات */
+    /* قسم خدماتنا: شريط صور التقييمات */
     #services-gallery{background:transparent}
     .insta-strip{
       border-radius:18px;border:1px solid var(--stroke);
@@ -217,24 +237,21 @@
     #map-contact>.container>h2,
     #map-contact>.container>p{ color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.35) }
 
-    /* بطاقات ملفات الـ Portfolio */
-    .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media(max-width:900px){.pf-grid{grid-template-columns:1fr}}
-    .pf-item{
+    /* ✅ روابط سابقة الأعمال (ملفات) كـ Link فقط */
+    .link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:900px){.link-grid{grid-template-columns:1fr}}
+    .link-card{
       display:flex;flex-direction:column;gap:10px;
       border-radius:var(--radius);
-      transition:transform .2s ease,box-shadow .2s ease
     }
-    .pf-item:hover{transform:translateY(-4px)}
-    .pf-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .pf-actions{display:flex;gap:10px;flex-wrap:wrap}
-    .pf-actions a{
+    .link-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .link-actions a{
       display:inline-flex;align-items:center;gap:8px;
       padding:10px 12px;border-radius:12px;
       border:1px solid var(--stroke);background:var(--card);
       font-weight:800;box-shadow:var(--shadow)
     }
-    .pf-actions a.primary{
+    .link-actions a.primary{
       background:linear-gradient(135deg,var(--brand),#22d3ee);
       border:none;color:#081418
     }
@@ -254,7 +271,7 @@
     "@type":"Organization",
     "name":"Dimensions Communication",
     "url":"https://dcotm.com",
-    "logo":"https://dcotm.com/dc_logo.png",
+    "logo":"https://dcotm.com/dc_logo.png.1",
     "sameAs":[
       "https://www.facebook.com/profile.php?id=61573739130386",
       "https://www.linkedin.com/company/106484073/",
@@ -264,48 +281,63 @@
   }
   </script>
 </head>
+
 <body>
   <!-- الهيدر + القائمة -->
   <header>
     <div class="container bar">
-      <div class="controls">
-        <button id="langBtn" class="control" data-i18n="lang_btn" data-i18n-attr-aria-label="aria_lang" aria-label="Language">AR/EN</button>
-        <button id="themeBtn" class="control" data-i18n-attr-aria-label="aria_theme" aria-label="Theme">🌙</button>
+      <!-- ✅ الشعار فقط -->
+      <a href="#home" class="brand" aria-label="DC" data-i18n-attr-aria-label="aria_logo">
+        <img id="logo" alt="DC logo" data-i18n-attr-alt="alt_logo">
+      </a>
+
+      <!-- ✅ اللغة + الثيم + السوشال كما هم -->
+      <div class="bar-actions">
+        <div class="controls">
+          <button id="langBtn" class="control" data-i18n="lang_btn" data-i18n-attr-aria-label="aria_lang" aria-label="Language">AR/EN</button>
+          <button id="themeBtn" class="control" data-i18n-attr-aria-label="aria_theme" aria-label="Theme">🌙</button>
+        </div>
+
+        <nav class="social" aria-label="Social" data-i18n-attr-aria-label="aria_social">
+          <a data-social="facebook" target="_blank" rel="noopener"
+             href="https://web.facebook.com/profile.php?id=61573739130386&locale=ar_AR"
+             aria-label="Facebook"
+             data-i18n-attr-aria-label="aria_facebook"
+             data-i18n-attr-href="href_facebook">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2V9.6c0-2 1.2-3.1 3-3.1.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.3V12h2.2l-.35 3h-1.85v7A10 10 0 0 0 22 12"/></svg>
+          </a>
+
+          <a data-social="linkedin" target="_blank" rel="noopener"
+             href="https://www.linkedin.com/company/106484073/admin/dashboard/"
+             aria-label="LinkedIn"
+             data-i18n-attr-aria-label="aria_linkedin"
+             data-i18n-attr-href="href_linkedin">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v15H0zM7.5 8H12v2h.06c.62-1.18 2.14-2.43 4.4-2.43 4.7 0 5.57 3.09 5.57 7.11V23H17v-6.62c0-1.58-.03-3.63-2.21-3.63-2.21 0-2.55 1.73-2.55 3.52V23H7.5z"/></svg>
+          </a>
+
+          <a data-social="instagram" target="_blank" rel="noopener"
+             href="https://www.instagram.com/dimensions.communication"
+             aria-label="Instagram"
+             data-i18n-attr-aria-label="aria_instagram"
+             data-i18n-attr-href="href_instagram">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="4" y="4" width="16" height="16" rx="4"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <circle cx="18" cy="6.5" r="1"/>
+            </svg>
+          </a>
+
+          <a data-social="whatsapp" target="_blank" rel="noopener"
+             href="https://wa.me/962791460998"
+             aria-label="WhatsApp"
+             data-i18n-attr-aria-label="aria_whatsapp"
+             data-i18n-attr-href="href_whatsapp">
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.52 3.48A11.77 11.77 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.1.55 4.07 1.52 5.78L0 24l6.33-1.66A11.9 11.9 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52Z"/>
+            </svg>
+          </a>
+        </nav>
       </div>
-
-      <a href="#home" class="center-logo" aria-label="DC Logo" data-i18n-attr-aria-label="aria_logo"><img id="logo" alt="DC logo"></a>
-
-      <nav class="social" aria-label="Social" data-i18n-attr-aria-label="aria_social">
-        <a data-social="facebook" target="_blank" rel="noopener"
-           href="https://web.facebook.com/profile.php?id=61573739130386&locale=ar_AR"
-           aria-label="Facebook" data-i18n-attr-aria-label="aria_facebook">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2V9.6c0-2 1.2-3.1 3-3.1.9 0 1.8.16 1.8.16v2h-1c-1 0-1.3.62-1.3 1.3V12h2.2l-.35 3h-1.85v7A10 10 0 0 0 22 12"/></svg>
-        </a>
-
-        <a data-social="linkedin" target="_blank" rel="noopener"
-           href="https://www.linkedin.com/company/106484073/admin/dashboard/"
-           aria-label="LinkedIn" data-i18n-attr-aria-label="aria_linkedin">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v15H0zM7.5 8H12v2h.06c.62-1.18 2.14-2.43 4.4-2.43 4.7 0 5.57 3.09 5.57 7.11V23H17v-6.62c0-1.58-.03-3.63-2.21-3.63-2.21 0-2.55 1.73-2.55 3.52V23H7.5z"/></svg>
-        </a>
-
-        <a data-social="instagram" target="_blank" rel="noopener"
-           href="https://www.instagram.com/dimensions.communication"
-           aria-label="Instagram" data-i18n-attr-aria-label="aria_instagram">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="4" y="4" width="16" height="16" rx="4"/>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-            <circle cx="18" cy="6.5" r="1"/>
-          </svg>
-        </a>
-
-        <a data-social="whatsapp" target="_blank" rel="noopener"
-           href="https://wa.me/962791460998"
-           aria-label="WhatsApp" data-i18n-attr-aria-label="aria_whatsapp">
-          <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.52 3.48A11.77 11.77 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.1.55 4.07 1.52 5.78L0 24l6.33-1.66A11.9 11.9 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52Z"/>
-          </svg>
-        </a>
-      </nav>
     </div>
 
     <nav class="subnav" aria-label="Main links" data-i18n-attr-aria-label="aria_main_links">
@@ -313,9 +345,19 @@
         <ul class="subnav-list">
           <li><a href="#home" data-i18n="nav_about">من نحن</a></li>
           <li><a href="#about" data-i18n="nav_services">خدماتنــــــــا</a></li>
-          <li><a href="#portfolio-files" data-i18n="nav_portfolio">سابقة الأعمال</a></li>
+
+          <!-- ✅ عند الضغط يفتح Google Drive مباشرة -->
+          <li>
+            <a target="_blank" rel="noopener"
+               href="https://drive.google.com/drive/folders/194YCjCVEt0ZGSqfE1QEDUETrFeeVdX3W"
+               data-i18n="nav_portfolio_files"
+               data-i18n-attr-href="href_portfolio_files">
+              سابقة الأعمال (ملفات)
+            </a>
+          </li>
+
+          <li><a href="#portfolio" data-i18n="nav_portfolio">سابقة الأعمال</a></li>
           <li><a href="#map-contact" data-i18n="nav_contact">تواصل معنا</a></li>
-          <li><a href="#blog" data-i18n="nav_blog">المدونة</a></li>
         </ul>
       </div>
     </nav>
@@ -330,8 +372,12 @@
     <div class="slideshow" id="slideshow" aria-hidden="true" style="display:none"></div>
     <div class="shade"></div>
     <div class="content container">
-      <h1 data-i18n="hero_title">أبعاد التواصل للتسويق الرقمي</h1>
-      <p class="muted" data-i18n="hero_sub" style="color:#e5e7eb;margin-top:6px">نبني حضورك الرقمي من الهوية وحتى التحويل</p>
+      <h1 data-i18n="hero_title">أﺑﻌﺎد اﻟﺘﻮاﺻﻞ ﻟﻠﺘﺴﻮﻳﻖ الأﻟﻜﺘﺮوﻧﻲ</h1>
+
+      <p id="heroDesc" class="muted" data-i18n="hero_sub" style="color:#e5e7eb;margin-top:6px">
+        نبني حضورك الرقمي من الهوية وحتى التحويل
+      </p>
+
       <div id="videoHint" style="display:none;margin-top:10px;background:#111827;color:#fff;padding:8px 12px;border-radius:10px" data-i18n="video_fallback">تعذر تحميل الفيديو. سيتم تشغيل عرض شرائح بديل.</div>
       <div id="logoHint" style="display:none;margin-top:10px;background:#111827;color:#fff;padding:8px 12px" data-i18n="logo_fallback"></div>
       <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center">
@@ -390,52 +436,42 @@
     </div>
   </section>
 
-  <!-- ✅ Portfolio files section (تحميل PDF) -->
+  <!-- ✅ سابقة الأعمال (ملفات) = Links فقط إلى Google Drive (بدون PDF محتوى) -->
   <section id="portfolio-files">
     <div class="container reveal">
-      <h2 style="margin-top:0" data-i18n="portfolio_files_title">سابقة الأعمال(ملفات)</h2>
+      <h2 style="margin-top:0" data-i18n="portfolio_files_title">سابقة الأعمال (ملفات)</h2>
       <p class="muted" style="margin:-6px 0 16px;text-align:center" data-i18n="portfolio_files_desc">
-        اضغط لتحميل الملفات بصيغة PDF.
+        اضغط لفتح Google Drive.
       </p>
 
-      <div class="pf-grid">
-        <article class="card pf-item">
-          <div class="pf-meta">
-            <strong data-i18n="pf_profile">الملف التعريفي للشركة (أبعاد التواصل)</strong>
-            <span class="muted" data-i18n="pf_pdf">PDF</span>
-          </div>
-          <div class="pf-actions">
-            <a class="primary"
-               href="الملف%20التعريفي%20للشركة%20(%D8%A3%D8%A8%D8%B9%D8%A7%D8%AF%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84)%20(1)%20(1).pdf"
-               download="Company-Profile.pdf"
-               target="_blank" rel="noopener"
-               data-i18n="pf_download">تحميل</a>
-            <a
-               href="الملف%20التعريفي%20للشركة%20(%D8%A3%D8%A8%D8%B9%D8%A7%D8%AF%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84)%20(1)%20(1).pdf"
-               target="_blank" rel="noopener"
-               data-i18n="pf_preview">معاينة</a>
+      <div class="link-grid">
+        <article class="card link-card">
+          <strong data-i18n="pf_profile">الملف التعريفي للشركة (أبعاد التواصل)</strong>
+          <div class="link-actions">
+            <a class="primary" target="_blank" rel="noopener"
+               href="https://drive.google.com/drive/folders/194YCjCVEt0ZGSqfE1QEDUETrFeeVdX3W"
+               data-i18n="open_drive"
+               data-i18n-attr-href="href_pf_profile">فتح Google Drive</a>
           </div>
         </article>
 
-        <article class="card pf-item">
-          <div class="pf-meta">
-            <strong data-i18n="pf_designs_done">تصاميم قمنا بها</strong>
-            <span class="muted" data-i18n="pf_pdf">PDF</span>
-          </div>
-          <div class="pf-actions">
-            <a class="primary" href="تصاميم%20قمنا%20بها.pdf" download="Designs.pdf" target="_blank" rel="noopener" data-i18n="pf_download">تحميل</a>
-            <a href="تصاميم%20قمنا%20بها.pdf" target="_blank" rel="noopener" data-i18n="pf_preview">معاينة</a>
+        <article class="card link-card">
+          <strong data-i18n="pf_designs_done">تصاميم قمنا بها</strong>
+          <div class="link-actions">
+            <a class="primary" target="_blank" rel="noopener"
+               href="https://drive.google.com/drive/folders/194YCjCVEt0ZGSqfE1QEDUETrFeeVdX3W"
+               data-i18n="open_drive"
+               data-i18n-attr-href="href_pf_designs">فتح Google Drive</a>
           </div>
         </article>
 
-        <article class="card pf-item">
-          <div class="pf-meta">
-            <strong data-i18n="pf_campaigns_done">حملات إعلانية قمنا بها</strong>
-            <span class="muted" data-i18n="pf_pdf">PDF</span>
-          </div>
-          <div class="pf-actions">
-            <a class="primary" href="حملات%20إعلانية%20قمنا%20بها.pdf" download="Campaigns.pdf" target="_blank" rel="noopener" data-i18n="pf_download">تحميل</a>
-            <a href="حملات%20إعلانية%20قمنا%20بها.pdf" target="_blank" rel="noopener" data-i18n="pf_preview">معاينة</a>
+        <article class="card link-card">
+          <strong data-i18n="pf_campaigns_done">حملات إعلانية قمنا بها</strong>
+          <div class="link-actions">
+            <a class="primary" target="_blank" rel="noopener"
+               href="https://drive.google.com/drive/folders/194YCjCVEt0ZGSqfE1QEDUETrFeeVdX3W"
+               data-i18n="open_drive"
+               data-i18n-attr-href="href_pf_campaigns">فتح Google Drive</a>
           </div>
         </article>
       </div>
@@ -547,27 +583,6 @@
     </div>
   </section>
 
-  <!-- المدونة -->
-  <section id="blog">
-    <div class="container reveal">
-      <h2 style="margin-top:0" data-i18n="blog_title">المدونة</h2>
-      <div class="grid-3">
-        <article class="card">
-          <h3 data-i18n="blog1">دليل تحسين محركات البحث 2025</h3>
-          <p class="muted" data-i18n="blog1_desc">نظرة عملية على سرعة الموقع، الكلمات المفتاحية، والروابط الخلفية.</p>
-        </article>
-        <article class="card">
-          <h3 data-i18n="blog2">هيكلة حملات Meta وGoogle</h3>
-          <p class="muted" data-i18n="blog2_desc">إستراتيجية الميزانيات وتقسيم الجماهير وقياس التحويلات.</p>
-        </article>
-        <article class="card">
-          <h3 data-i18n="blog3">الأتمتة مع Google Sheets + GAS</h3>
-          <p class="muted" data-i18n="blog3_desc">نموذج جمع ليدز وربطه بالبريد والواتساب.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <footer>
     <div class="container">
       <span data-i18n="rights_prefix">©</span>
@@ -579,6 +594,8 @@
   <button id="topBtn" class="control" data-i18n="back_to_top" data-i18n-attr-aria-label="back_to_top" aria-label="Back to top">⬆︎</button>
 
   <script>
+    const DRIVE_FOLDER = "https://drive.google.com/drive/folders/194YCjCVEt0ZGSqfE1QEDUETrFeeVdX3W";
+
     /* قاموس شامل */
     const i18n={
       ar:{
@@ -586,6 +603,8 @@
         meta_desc:"أبعاد التواصل للتسويق الرقمي: مواقع وصفحات هبوط، إعلانات مدفوعة، سيو، وأتمتة مبنية على بيانات.",
         og_title:"Dimensions Communication | أبعاد التواصل",
         og_desc:"نبني حضورك الرقمي من الهوية وحتى التحويل.",
+
+        alt_logo:"شعار أبعاد التواصل",
 
         lang_btn:"AR/EN",
         aria_lang:"تغيير اللغة",
@@ -600,22 +619,37 @@
         aria_instagram:"إنستغرام",
         aria_whatsapp:"واتساب",
 
+        /* روابط تُحدّث حسب اللغة */
+        href_facebook:"https://web.facebook.com/profile.php?id=61573739130386&locale=ar_AR",
+        href_linkedin:"https://www.linkedin.com/company/106484073/admin/dashboard/",
+        href_instagram:"https://www.instagram.com/dimensions.communication",
+        href_whatsapp:"https://wa.me/962791460998",
+
         nav_about:"من نحن",
         nav_services:"خدماتنا",
+        nav_portfolio_files:"سابقة الأعمال (ملفات)",
         nav_portfolio:"سابقة الأعمال",
         nav_contact:"تواصل معنا",
-        nav_blog:"المدونة",
+
+        /* ✅ رابط القائمة (ملفات) إلى Google Drive */
+        href_portfolio_files:DRIVE_FOLDER,
 
         pf_profile:"الملف التعريفي للشركة (أبعاد التواصل)",
         pf_designs_done:"تصاميم قمنا بها",
         pf_campaigns_done:"حملات إعلانية قمنا بها",
 
-        pf_pdf:"PDF",
-        pf_download:"تحميل",
-        pf_preview:"معاينة",
+        /* ✅ روابط البطاقات (ملفات) إلى Google Drive */
+        href_pf_profile:DRIVE_FOLDER,
+        href_pf_designs:DRIVE_FOLDER,
+        href_pf_campaigns:DRIVE_FOLDER,
 
-        hero_title:"أبعاد التواصل للتسويق الرقمي",
-        hero_sub:"نبني حضورك الرقمي من الهوية وحتى التحويل",
+        open_drive:"فتح Google Drive",
+
+        hero_title:"أﺑﻌﺎد اﻟﺘﻮاﺻﻞ ﻟﻠﺘﺴﻮﻳﻖ الأﻟﻜﺘﺮوﻧﻲ",
+        hero_sub:
+          "وكالة أبعاد التواصل رائدة عالميًا في التسويق الرقمي واستشارات الأعمال، تأسست عام 2022 في الولايات المتحدة، وتعمل الآن في عمّان – الأردن.\n" +
+          "نساعد العلامات التجارية على التوسع وزيادة الإيرادات وقيادة صناعاتها.\n" +
+          "نخدم عملاء في أمريكا الشمالية والشرق الأوسط وخارجها، ونقدّم استراتيجيات قائمة على البيانات تحوّل الاستثمار التسويقي إلى ربح حقيقي.",
         video_fallback:"تعذر تحميل الفيديو. سيتم تشغيل عرض شرائح بديل.",
         logo_fallback:"",
         cta_services:"خدماتنا",
@@ -654,7 +688,8 @@
         alt_review5:"رأي عميل 5", alt_review6:"رأي عميل 6", alt_review7:"رأي عميل 7", alt_review8:"رأي عميل 8",
 
         portfolio_files_title:"سابقة الأعمال (ملفات)",
-portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", // (اختياري صياغة)
+        portfolio_files_desc:"اضغط لفتح Google Drive.",
+
         portfolio_title:"سابقة الأعمال",
         portfolio_strip:"شركات عملنا برفقتها",
         portfolio_hint:"يمر يمينًا بلا توقف",
@@ -671,11 +706,6 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
         ph_name:"الاسم", ph_email:"البريد", ph_phone:"الهاتف", ph_msg:"أخبرنا عن مشروعك", ph_submit:"إرسال",
         ph_phone_title:"+962xxxxxxxxx أو 0xxxxxxxxx",
 
-        blog_title:"المدونة",
-        blog1:"دليل تحسين محركات البحث 2025", blog1_desc:"نظرة عملية على سرعة الموقع، الكلمات المفتاحية، والروابط الخلفية.",
-        blog2:"هيكلة حملات Meta وGoogle", blog2_desc:"إستراتيجية الميزانيات وتقسيم الجماهير وقياس التحويلات.",
-        blog3:"الأتمتة مع Google Sheets + GAS", blog3_desc:"نموذج جمع ليدز وربطه بالبريد والواتساب.",
-
         rights_prefix:"©", rights:"جميع الحقوق محفوظة",
         back_to_top:"⬆︎",
 
@@ -686,6 +716,8 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
         meta_desc:"Digital marketing: websites, landing pages, ads, SEO, and data-driven automation.",
         og_title:"Dimensions Communication",
         og_desc:"We build your digital presence from brand to conversion.",
+
+        alt_logo:"Dimensions Communication logo",
 
         lang_btn:"EN/AR",
         aria_lang:"Change language",
@@ -700,22 +732,40 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
         aria_instagram:"Instagram",
         aria_whatsapp:"WhatsApp",
 
-        nav_about:"About",
+        /* روابط تُحدّث حسب اللغة */
+        href_facebook:"https://web.facebook.com/profile.php?id=61573739130386&locale=en_US",
+        href_linkedin:"https://www.linkedin.com/company/106484073/admin/dashboard/",
+        href_instagram:"https://www.instagram.com/dimensions.communication",
+        href_whatsapp:"https://wa.me/962791460998",
+
+        nav_about:"Who We Are",
         nav_services:"Services",
+        nav_portfolio_files:"Portfolio (Files)",
         nav_portfolio:"Portfolio",
         nav_contact:"Contact",
-        nav_blog:"Blog",
+
+        /* ✅ رابط القائمة (ملفات) إلى Google Drive */
+        href_portfolio_files:DRIVE_FOLDER,
 
         pf_profile:"Company Profile (Dimensions Communication)",
         pf_designs_done:"Designs We Made",
         pf_campaigns_done:"Advertising Campaigns We Ran",
 
-        pf_pdf:"PDF",
-        pf_download:"Download",
-        pf_preview:"Preview",
+        /* ✅ روابط البطاقات (ملفات) إلى Google Drive */
+        href_pf_profile:DRIVE_FOLDER,
+        href_pf_designs:DRIVE_FOLDER,
+        href_pf_campaigns:DRIVE_FOLDER,
 
-        hero_title:"Dimensions Communication",
-        hero_sub:"We build your digital presence from brand to conversion",
+        open_drive:"Open Google Drive",
+
+        /* ✅ بدل Who We Are فوق الفيديو */
+        hero_title:"Dimensions Communication\nDigital Marketing Agency",
+        hero_sub:
+          "Dimensions Communication Agency is a global leader in digital\n" +
+          "marketing and business consulting, established in 2022 in the USA and now operating in Amman, Jordan. We help brands scale, maximize\n" +
+          "revenue, and dominate their industries. Serving clients in North\n" +
+          "America, the Middle East, and beyond, we deliver data-driven\n" +
+          "strategies that convert marketing investments into real profit.",
         video_fallback:"Video failed to load. A slideshow will play instead.",
         logo_fallback:"",
         cta_services:"Our Services",
@@ -754,7 +804,7 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
         alt_review5:"Client review 5", alt_review6:"Client review 6", alt_review7:"Client review 7", alt_review8:"Client review 8",
 
         portfolio_files_title:"Portfolio (Files)",
-        portfolio_files_desc:"Click to download PDF files.",
+        portfolio_files_desc:"Click to open Google Drive.",
 
         portfolio_title:"Portfolio",
         portfolio_strip:"Companies we worked with",
@@ -772,11 +822,6 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
         ph_name:"Name", ph_email:"Email", ph_phone:"Phone", ph_msg:"Tell us about your project", ph_submit:"Send",
         ph_phone_title:"+962xxxxxxxxx or 0xxxxxxxxx",
 
-        blog_title:"Blog",
-        blog1:"SEO Guide 2025", blog1_desc:"A practical look at speed, keywords, and backlinks.",
-        blog2:"Structuring Meta & Google Campaigns", blog2_desc:"Budgets, audiences, and conversion tracking.",
-        blog3:"Automation with Google Sheets + GAS", blog3_desc:"Lead capture linked to email and WhatsApp.",
-
         rights_prefix:"©", rights:"All rights reserved",
         back_to_top:"⬆︎",
 
@@ -784,9 +829,9 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
       }
     };
 
-    /* دعم ترجمة الخصائص عبر data-i18n-attr-* */
+    /* دعم ترجمة الخصائص عبر data-i18n-attr-* (تشمل أي خاصية مثل href/alt/title/aria-label...) */
     function applyAttrI18n(lang){
-      document.querySelectorAll('[data-i18n-attr-aria-label],[data-i18n-attr-title],[data-i18n-attr-alt]')
+      document.querySelectorAll('[data-i18n-attr-aria-label],[data-i18n-attr-title],[data-i18n-attr-alt],[data-i18n-attr-href]')
         .forEach(el=>{
           for(const {name,value} of [...el.attributes]){
             if(!name.startsWith('data-i18n-attr-')) continue;
@@ -879,6 +924,7 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
       });
 
       applyAttrI18n(lang);
+
       document.title=i18n[lang].meta_title||document.title;
 
       const lb=document.getElementById('langBtn');
@@ -909,14 +955,14 @@ portfolio_files_desc: "اضغط لتحميل الملفات بصيغة PDF.", //
       if(window.scrollY>650) topBtn.classList.add('show'); else topBtn.classList.remove('show');
     });
 
-    /* الشعار */
+    /* ✅ الشعار الجديد dc_logo.png.1 */
     (function setLogo(){
-      const CAND=['dc_logo.png','dc_logo.png.png','dc_logo.png.jpg','dc_logo.jpg','logo.png','logo_dc.png'];
+      const CAND=['dc_logo.png.1','dc_logo.png','dc_logo.png.png','dc_logo.png.jpg','dc_logo.jpg','logo.png','logo_dc.png'];
       const el=document.getElementById('logo');
       (function tryi(i){
         if(i>=CAND.length){ const hint=document.getElementById('logoHint'); if(hint) hint.style.display='block'; return; }
         const img=new Image();
-        img.onload=()=>{el.src=CAND[i];el.style.display='block';};
+        img.onload=()=>{el.src=CAND[i];};
         img.onerror=()=>tryi(i+1);
         img.src=CAND[i];
       })(0);
